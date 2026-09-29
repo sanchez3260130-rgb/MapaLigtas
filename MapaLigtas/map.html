@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_bcc226b1f3b6d1fbddba204f5091bb91 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_bcc226b1f3b6d1fbddba204f5091bb91" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_bcc226b1f3b6d1fbddba204f5091bb91 = L.map(
+                "map_bcc226b1f3b6d1fbddba204f5091bb91",
+                {
+                    center: [14.27, 121.25],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5d11586b00c4e6627a35c8cdf69c478a = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5d11586b00c4e6627a35c8cdf69c478a.addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+            var circle_980d745fb18bcaf5939f1a529c1a8e37 = L.circle(
+                [14.3595, 121.0473],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_8a4c790c6a4dea5128984c1d5debe0df = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_042d4197be34c703eb32a22aaff57cd3 = $(`<div id="html_042d4197be34c703eb32a22aaff57cd3" style="width: 100.0%; height: 100.0%;">San Pedro: High risk</div>`)[0];
+                popup_8a4c790c6a4dea5128984c1d5debe0df.setContent(html_042d4197be34c703eb32a22aaff57cd3);
+            
+        
+
+        circle_980d745fb18bcaf5939f1a529c1a8e37.bindPopup(popup_8a4c790c6a4dea5128984c1d5debe0df)
+        ;
+
+        
+    
+    
+            var circle_3af82a4dc5c4ebe18d1da2fbb287346b = L.circle(
+                [14.3333, 121.0806],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_796b0ea12b87e58872f52ede1ca86d51 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_56d77bf4277c59060934ec39b6992af7 = $(`<div id="html_56d77bf4277c59060934ec39b6992af7" style="width: 100.0%; height: 100.0%;">Biñan: High risk</div>`)[0];
+                popup_796b0ea12b87e58872f52ede1ca86d51.setContent(html_56d77bf4277c59060934ec39b6992af7);
+            
+        
+
+        circle_3af82a4dc5c4ebe18d1da2fbb287346b.bindPopup(popup_796b0ea12b87e58872f52ede1ca86d51)
+        ;
+
+        
+    
+    
+            var circle_c7662ecfae860b405ff9f3543ca7012c = L.circle(
+                [14.3122, 121.1114],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_944c8a83657f06cb1e5cfe3fd9bd61a8 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f800fc2e357253782f44870980ac15ee = $(`<div id="html_f800fc2e357253782f44870980ac15ee" style="width: 100.0%; height: 100.0%;">Santa Rosa: Moderate risk</div>`)[0];
+                popup_944c8a83657f06cb1e5cfe3fd9bd61a8.setContent(html_f800fc2e357253782f44870980ac15ee);
+            
+        
+
+        circle_c7662ecfae860b405ff9f3543ca7012c.bindPopup(popup_944c8a83657f06cb1e5cfe3fd9bd61a8)
+        ;
+
+        
+    
+    
+            var circle_240690d547fafbc8f84a2de5e403f561 = L.circle(
+                [14.2789, 121.125],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_c926769f3900bad9717754a634378628 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_285e5495ce16e31f5dc4afe146abcba4 = $(`<div id="html_285e5495ce16e31f5dc4afe146abcba4" style="width: 100.0%; height: 100.0%;">Cabuyao: High risk</div>`)[0];
+                popup_c926769f3900bad9717754a634378628.setContent(html_285e5495ce16e31f5dc4afe146abcba4);
+            
+        
+
+        circle_240690d547fafbc8f84a2de5e403f561.bindPopup(popup_c926769f3900bad9717754a634378628)
+        ;
+
+        
+    
+    
+            var circle_455f4ec25a16a4133229c8c7c3c184ed = L.circle(
+                [14.2117, 121.1653],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_b3b0c2c445e997d7bcef1ef0adfa9fa7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ea59e206c40d352c710b6e8ce5c537b6 = $(`<div id="html_ea59e206c40d352c710b6e8ce5c537b6" style="width: 100.0%; height: 100.0%;">Calamba: High risk</div>`)[0];
+                popup_b3b0c2c445e997d7bcef1ef0adfa9fa7.setContent(html_ea59e206c40d352c710b6e8ce5c537b6);
+            
+        
+
+        circle_455f4ec25a16a4133229c8c7c3c184ed.bindPopup(popup_b3b0c2c445e997d7bcef1ef0adfa9fa7)
+        ;
+
+        
+    
+    
+            var circle_3df4c15deaa278cf974f67ebaa6c3005 = L.circle(
+                [14.1699, 121.2436],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_3995e5a06b1fce79b1edda484608c3a5 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_72149cc0288a5a2760d78ff07c8ab96e = $(`<div id="html_72149cc0288a5a2760d78ff07c8ab96e" style="width: 100.0%; height: 100.0%;">Los Baños: Very High risk</div>`)[0];
+                popup_3995e5a06b1fce79b1edda484608c3a5.setContent(html_72149cc0288a5a2760d78ff07c8ab96e);
+            
+        
+
+        circle_3df4c15deaa278cf974f67ebaa6c3005.bindPopup(popup_3995e5a06b1fce79b1edda484608c3a5)
+        ;
+
+        
+    
+    
+            var circle_4ee99ef8a1e245e9039b968c221ae715 = L.circle(
+                [14.1833, 121.2833],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_0dcc6c5b8a44b4840d6212ef859e63d1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bb81de6f0f89f0d7d5328f45a7f1f33e = $(`<div id="html_bb81de6f0f89f0d7d5328f45a7f1f33e" style="width: 100.0%; height: 100.0%;">Bay: Very High risk</div>`)[0];
+                popup_0dcc6c5b8a44b4840d6212ef859e63d1.setContent(html_bb81de6f0f89f0d7d5328f45a7f1f33e);
+            
+        
+
+        circle_4ee99ef8a1e245e9039b968c221ae715.bindPopup(popup_0dcc6c5b8a44b4840d6212ef859e63d1)
+        ;
+
+        
+    
+    
+            var circle_88ca75cc5f27aab231efdfde29c4006e = L.circle(
+                [14.1489, 121.3153],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_9f72f31d600665908879099ff4cb3203 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ed0c62ca2d5d02ff172edbd3405ef5dd = $(`<div id="html_ed0c62ca2d5d02ff172edbd3405ef5dd" style="width: 100.0%; height: 100.0%;">Calauan: Moderate risk</div>`)[0];
+                popup_9f72f31d600665908879099ff4cb3203.setContent(html_ed0c62ca2d5d02ff172edbd3405ef5dd);
+            
+        
+
+        circle_88ca75cc5f27aab231efdfde29c4006e.bindPopup(popup_9f72f31d600665908879099ff4cb3203)
+        ;
+
+        
+    
+    
+            var circle_8e501ac1917b2e847a3b589a604b65fb = L.circle(
+                [14.2814, 121.4161],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_ca49abbb64287bba4a504ebfc49852ed = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7e916125f8e195a39d62f66f53461b1a = $(`<div id="html_7e916125f8e195a39d62f66f53461b1a" style="width: 100.0%; height: 100.0%;">Santa Cruz: Very High risk</div>`)[0];
+                popup_ca49abbb64287bba4a504ebfc49852ed.setContent(html_7e916125f8e195a39d62f66f53461b1a);
+            
+        
+
+        circle_8e501ac1917b2e847a3b589a604b65fb.bindPopup(popup_ca49abbb64287bba4a504ebfc49852ed)
+        ;
+
+        
+    
+    
+            var circle_8b9d1dc53ea64894c05588ce9034535a = L.circle(
+                [14.2703, 121.4553],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_d4b256585370708ac11fc4ce1761d517 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_ad60b3d0e7956a5a62cd3aea0b9cf71b = $(`<div id="html_ad60b3d0e7956a5a62cd3aea0b9cf71b" style="width: 100.0%; height: 100.0%;">Pagsanjan: High risk</div>`)[0];
+                popup_d4b256585370708ac11fc4ce1761d517.setContent(html_ad60b3d0e7956a5a62cd3aea0b9cf71b);
+            
+        
+
+        circle_8b9d1dc53ea64894c05588ce9034535a.bindPopup(popup_d4b256585370708ac11fc4ce1761d517)
+        ;
+
+        
+    
+    
+            var circle_296975b60cd41bcef391ed7f0b4dcd0c = L.circle(
+                [14.4169, 121.447],
+                {"bubblingMouseEvents": true, "color": "yellow", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "yellow", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_ae5bd00576e15448bd40e15bd10a791a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0dd3df093d864966759a43fb7f4ea551 = $(`<div id="html_0dd3df093d864966759a43fb7f4ea551" style="width: 100.0%; height: 100.0%;">Siniloan: Moderate risk</div>`)[0];
+                popup_ae5bd00576e15448bd40e15bd10a791a.setContent(html_0dd3df093d864966759a43fb7f4ea551);
+            
+        
+
+        circle_296975b60cd41bcef391ed7f0b4dcd0c.bindPopup(popup_ae5bd00576e15448bd40e15bd10a791a)
+        ;
+
+        
+    
+    
+            var circle_5a2b6868d2e737ffcad72b6528c714d2 = L.circle(
+                [14.1358, 121.4153],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_da9c80759268215e443c498421e96a2d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3457e09d673987c9e8533150b18d55ca = $(`<div id="html_3457e09d673987c9e8533150b18d55ca" style="width: 100.0%; height: 100.0%;">Nagcarlan: Low risk</div>`)[0];
+                popup_da9c80759268215e443c498421e96a2d.setContent(html_3457e09d673987c9e8533150b18d55ca);
+            
+        
+
+        circle_5a2b6868d2e737ffcad72b6528c714d2.bindPopup(popup_da9c80759268215e443c498421e96a2d)
+        ;
+
+        
+    
+    
+            var circle_751948eaa7492abf628497eca9629e94 = L.circle(
+                [14.1264, 121.4344],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 3000, "stroke": true, "weight": 3}
+            ).addTo(map_bcc226b1f3b6d1fbddba204f5091bb91);
+        
+    
+        var popup_0a62452135db65bbff14296d52cb36aa = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_131afde226e6aafd27ecf984a53a4ede = $(`<div id="html_131afde226e6aafd27ecf984a53a4ede" style="width: 100.0%; height: 100.0%;">Liliw: Low risk</div>`)[0];
+                popup_0a62452135db65bbff14296d52cb36aa.setContent(html_131afde226e6aafd27ecf984a53a4ede);
+            
+        
+
+        circle_751948eaa7492abf628497eca9629e94.bindPopup(popup_0a62452135db65bbff14296d52cb36aa)
+        ;
+
+        
+    
+</script>
+</html>
