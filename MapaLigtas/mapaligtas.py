@@ -20,13 +20,20 @@ areas = [
 colors = {1: "green", 2: "yellow", 3: "orange", 4: "red"}
 names = {1: "Low", 2: "Moderate", 3: "High", 4: "Very High"}
 
-# Make a map centered on Laguna
+# Make a map locked to Laguna
+LAGUNA_BOUNDS = [[13.98, 121.00], [14.52, 121.65]]
+
 my_map = folium.Map(
     location=[14.27, 121.25],
     zoom_start=10,
+    min_zoom=10,
+    max_bounds=True,
+    min_lat=13.98, max_lat=14.52,
+    min_lon=121.00, max_lon=121.65,
     tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
     attr="Esri",
 )
+my_map.fit_bounds(LAGUNA_BOUNDS)
 
 # Draw one colored circle for each place
 for name, lat, lng, risk in areas:
