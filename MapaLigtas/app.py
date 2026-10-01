@@ -1,4 +1,5 @@
 import math
+import os
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
@@ -138,15 +139,31 @@ if pos:
             st.write(f"{icons[risk]} **{name}** – {names[risk][i]} – {d:.1f} {t['away']}")
 
 # ---------- Map ----------
+# Rough bounding box of Laguna province: [south-west], [north-east]
+LAGUNA_BOUNDS = [[13.98, 121.00], [14.52, 121.65]]
+
 center = list(pos) if in_laguna else [14.27, 121.25]
 zoom = 11 if in_laguna else 10
 
 my_map = folium.Map(
     location=center,
     zoom_start=zoom,
+    min_zoom=10,                  # can't zoom out past Laguna
+    max_bounds=True,              # can't drag away from Laguna
+    min_lat=LAGUNA_BOUNDS[0][0], max_lat=LAGUNA_BOUNDS[1][0],
+    min_lon=LAGUNA_BOUNDS[0][1], max_lon=LAGUNA_BOUNDS[1][1],
     tiles="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",
     attr="Esri",
 )
+if not in_laguna:
+    my_map.fit_bounds(LAGUNA_BOUNDS)
+
+# Optional: draw Laguna's exact outline if laguna.geojson is next to this file
+if os.path.exists("laguna.geojson"):
+    folium.GeoJson(
+        "laguna.geojson",
+        style_function=lambda f: {"color": "#1f4e79", "weight": 3, "fillOpacity": 0},
+    ).add_to(my_map)
 
 for name, lat, lng, risk in areas:
     popup_text = f"<b>{name}</b><br>{t['risk']}: {names[risk][i]}<br>{tips[risk][i]}"
