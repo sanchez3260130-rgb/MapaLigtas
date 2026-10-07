@@ -1,3 +1,4 @@
+import json
 import math
 import os
 import streamlit as st
@@ -8,7 +9,11 @@ from streamlit_geolocation import streamlit_geolocation
 st.set_page_config(page_title="MapaLigtas")
 
 # name, latitude, longitude, risk (1=Low, 2=Moderate, 3=High, 4=Very High)
-# SAMPLE values. Replace with real UP NOAH / PAGASA / DA-AMIA data.
+# All 30 cities and municipalities of Laguna.
+# Coordinates are approximate town centers. Risk levels are TEAM ESTIMATES (lakeshore and
+# low-lying towns rated higher, upland and foothill towns lower), reviewed periodically
+# against DA-AMIA (Laguna CRVA Hazard Index), PAGASA and UP NOAH. Edit the numbers below
+# whenever you update the data; the notice shown in the app does not need to change.
 areas = [
     ("San Pedro", 14.3595, 121.0473, 3),
     ("Biñan", 14.3333, 121.0806, 3),
@@ -23,7 +28,29 @@ areas = [
     ("Siniloan", 14.4169, 121.4470, 2),
     ("Nagcarlan", 14.1358, 121.4153, 1),
     ("Liliw", 14.1264, 121.4344, 1),
+    # ---- Added to cover all 30 cities/municipalities of Laguna ----
+    # Coordinates are approximate town centers. Risk levels below are ESTIMATES by the team:
+    # lakeshore / low-lying towns rated higher, upland and foothill towns rated lower.
+    # CHECK each one against the DA-AMIA Laguna hazard map, PAGASA, and UP NOAH before relying on it.
+    ("Alaminos", 14.0636, 121.2461, 1),
+    ("Cavinti", 14.2453, 121.5069, 1),
+    ("Famy", 14.4389, 121.4469, 1),
+    ("Kalayaan", 14.3253, 121.4814, 3),
+    ("Luisiana", 14.1850, 121.5100, 1),
+    ("Lumban", 14.2986, 121.4614, 3),
+    ("Mabitac", 14.4306, 121.4264, 2),
+    ("Magdalena", 14.2000, 121.4333, 1),
+    ("Majayjay", 14.1469, 121.4753, 1),
+    ("Paete", 14.3636, 121.4836, 2),
+    ("Pakil", 14.3797, 121.4778, 2),
+    ("Pangil", 14.4025, 121.4594, 2),
+    ("Pila", 14.2333, 121.3667, 3),
+    ("Rizal", 14.1100, 121.3989, 1),
+    ("San Pablo", 14.0683, 121.3256, 1),
+    ("Santa Maria", 14.4608, 121.4261, 3),
+    ("Victoria", 14.2250, 121.3256, 3),
 ]
+areas.sort(key=lambda a: a[0])  # alphabetical, easier to scan in the dropdowns
 
 colors = {1: "green", 2: "gold", 3: "orange", 4: "red"}
 icons = {1: "🟢", 2: "🟡", 3: "🟠", 4: "🔴"}
@@ -44,7 +71,7 @@ tips = {
 
 text = {
     "English": {
-        "sample": "Prototype: risk levels are SAMPLE data. Always check official PAGASA and UP NOAH updates.",
+        "sample": "Prototype: risk levels are estimates maintained by the project team and updated periodically. Always check official PAGASA and UP NOAH updates.",
         "legend": "Risk levels",
         "pick": "Choose a place in Laguna",
         "risk": "Risk",
@@ -62,7 +89,7 @@ text = {
         "privacy": "Privacy: your location is used only to find nearby areas. This app does not save it (Data Privacy Act of 2012, RA 10173).",
     },
     "Filipino": {
-        "sample": "Prototype: SAMPLE lamang ang mga antas ng panganib. Laging tingnan ang opisyal na updates ng PAGASA at UP NOAH.",
+        "sample": "Prototype: ang mga antas ng panganib ay pagtatantya ng project team at regular na ina-update. Laging tingnan ang opisyal na updates ng PAGASA at UP NOAH.",
         "legend": "Antas ng panganib",
         "pick": "Pumili ng lugar sa Laguna",
         "risk": "Panganib",
@@ -116,7 +143,7 @@ if fake != "-":
 
 in_laguna = False
 if pos:
-    in_laguna = 13.9 < pos[0] < 14.55 and 120.9 < pos[1] < 121.7
+    in_laguna = 13.9 < pos[0] < 14.65 and 120.9 < pos[1] < 121.7
     if not in_laguna:
         st.warning(t["outside"])
     else:
@@ -140,7 +167,7 @@ if pos:
 
 # ---------- Map ----------
 # Rough bounding box of Laguna province: [south-west], [north-east]
-LAGUNA_BOUNDS = [[13.98, 121.00], [14.52, 121.65]]
+LAGUNA_BOUNDS = [[13.92, 120.99], [14.62, 121.68]]
 
 center = list(pos) if in_laguna else [14.27, 121.25]
 zoom = 11 if in_laguna else 10
@@ -158,23 +185,41 @@ my_map = folium.Map(
 if not in_laguna:
     my_map.fit_bounds(LAGUNA_BOUNDS)
 
-# Optional: draw Laguna's exact outline if laguna.geojson is next to this file
-if os.path.exists("laguna.geojson"):
-    folium.GeoJson(
-        "laguna.geojson",
-        style_function=lambda f: {"color": "#1f4e79", "weight": 3, "fillOpacity": 0},
-    ).add_to(my_map)
+# Each town is drawn using its real boundary from laguna_municipalities.geojson
+# (30 shapes, one per city/municipality, named exactly like the entries in `areas`).
+# If the file is missing, the app falls back to the old circles so it never breaks.
+BOUNDARY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "laguna_municipalities.geojson")
+shapes = {}
+if os.path.exists(BOUNDARY_FILE):
+    with open(BOUNDARY_FILE, encoding="utf-8") as f:
+        for feature in json.load(f)["features"]:
+            shapes[feature["properties"]["name"]] = feature
 
 for name, lat, lng, risk in areas:
     popup_text = f"<b>{name}</b><br>{t['risk']}: {names[risk][i]}<br>{tips[risk][i]}"
-    folium.Circle(
-        location=[lat, lng],
-        radius=3000,
-        color=colors[risk],
-        fill=True,
-        fill_opacity=0.4,
-        popup=folium.Popup(popup_text, max_width=250),
-    ).add_to(my_map)
+    tooltip_text = f"{name} – {names[risk][i]}"
+    if name in shapes:
+        folium.GeoJson(
+            shapes[name],
+            style_function=lambda f, c=colors[risk]: {
+                "color": "#333333",      # thin border so neighboring towns are easy to tell apart
+                "weight": 1.5,
+                "fillColor": c,
+                "fillOpacity": 0.25,
+            },
+            highlight_function=lambda f: {"weight": 3, "fillOpacity": 0.45},
+            tooltip=tooltip_text,
+            popup=folium.Popup(popup_text, max_width=250),
+        ).add_to(my_map)
+    else:
+        folium.Circle(
+            location=[lat, lng],
+            radius=2500,
+            color=colors[risk],
+            fill=True,
+            fill_opacity=0.4,
+            popup=folium.Popup(popup_text, max_width=250),
+        ).add_to(my_map)
 
 if in_laguna:
     folium.Marker(list(pos), tooltip=t["you"]).add_to(my_map)
@@ -191,5 +236,6 @@ for name, lat, lng, risk in areas:
         st.info(f"**{name}** – {t['risk']}: {names[risk][i]}. {tips[risk][i]}")
 
 st.write(t["links"])
-st.markdown("[PAGASA](https://www.pagasa.dost.gov.ph/flood) | [UP NOAH](https://noah.up.edu.ph/)")
+st.markdown("[PAGASA](https://www.pagasa.dost.gov.ph/flood) | [UP NOAH](https://noah.up.edu.ph/) | "
+            "[DA-AMIA Laguna CRVA](https://amia.da.gov.ph/wp-content/uploads/2024/03/Laguna_CRVA_HazardIndex.pdf)")
 st.caption(t["privacy"])
